@@ -34,15 +34,14 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id
     },
-    attributes: ['id', 'product_name', 'price', 'stock'],
     indclude: [
       {
         model: Category,
-        attributes: ['category_name']
+        attributes: ['id', 'category_name']
       },
       {
         model: Tag,
-        attributes: ['tag_name']
+        attributes: ['id', 'tag_name']
       }
     ]
   })
@@ -66,7 +65,7 @@ router.post('/', (req, res) => {
     price: req.body.price,
     stock: req.body.stock,
     category_id: req.body.category_id,
-    tagIds: req.body.tagIds
+    tagIds: req.body.tag_id
   })
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
